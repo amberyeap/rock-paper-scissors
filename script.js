@@ -1,76 +1,83 @@
-function getRandomInt(max) {
-	return Math.floor(Math.random() * max);
-}
-
 function getComputerChoice() {
-	let n = getRandomInt(3);
-
-	if (n == 0) {
-		return ("rock");
-	} else if (n == 1) {
-		return ("paper");
-	} else if (n == 2) {
-		return ("scissors");
-	}
+	let index = Math.floor(Math.random() * 3);
+	let choices = ['rock', 'paper', 'scissors'];
+	return (choices[index]);
 }
 
-// function getHumanChoice() {
-// 	let choice = prompt("Rock, paper, scissors?", "");
-
-// 	return choice;
-// }
-
-let humanScore = 0;
+let playerScore = 0;
 let computerScore = 0;
+let drawScore = 0;
 
-function playRound(humanChoice, computerChoice) {
-	humanChoice = humanChoice.toLowerCase();
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => {
+	button.addEventListener('click', (event) => {
+		const playerChoice = event.target.id;
+		console.log(playerChoice);
+		const computerChoice = getComputerChoice();
 
-	if (humanChoice === computerChoice) {
-		console.log(`It's a draw!`);
-	} else if (
-		(humanChoice === "rock" && computerChoice === "scissors") || 
-		(humanChoice === "paper" && computerChoice === "rock") ||
-		(humanChoice === "scissors" && computerChoice === "paper")
-	) {
-		humanScore++;
-		console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-	} else {
+		const result = playRound(playerChoice.toLowerCase(), computerChoice);
+
+		trackScore(result);
+		updateScoreDisplay(playerScore, computerScore, drawScore);
+		checkWinner(playerScore, computerScore);
+	});
+});
+
+function playRound(playerChoice, computerChoice) {
+	if ((playerChoice === 'rock' && computerChoice === 'scissors') ||
+		(playerChoice === 'paper' && computerChoice === 'rock') ||
+		(playerChoice === 'scissors' && computerChoice === 'paper')) {
+			return 'You win!';
+		} else if (playerChoice === computerChoice) {
+			return "It's a draw!";
+		} else {
+			return 'You lose!';
+		}
+}
+
+function trackScore(result) {
+	if (result === 'You win!') {
+		playerScore++;
+	} else if (result === "It's a draw!") {
+		drawScore++;
+	} else if (result === 'You lose!') {
 		computerScore++;
-		console.log(`You lose. ${computerChoice} beats ${humanChoice}`);
 	}
 }
 
-// for (let i = 1; i <= 5; i++) {
-	// const humanSelection = getHumanChoice();
-	// const computerSelection = getComputerChoice();
-	// playRound(humanSelection, computerSelection);
-	// alert("One more round?");
-// }
+function updateScoreDisplay(playerScore, computerScore, drawScore) {
+	const player = document.getElementById('player-score');
+	const comp = document.getElementById('computer-score');
+	const draw = document.getElementById('draw-score');
 
-// if (humanScore > computerScore) {
-// 	console.log("Congrats, you won the game!");
-// } else {
-// 	console.log("I won the game! Better luck next time.");
-// }
+	player.textContent = playerScore;
+	comp.textContent = computerScore;
+	draw.textContent = drawScore;
+}
 
-const rockButton = document.getElementById("rock");
-rockButton.onclick = () => playRound("rock", getComputerChoice());
+function checkWinner(playerScore, computerScore) {
+	const winnerDiv = document.querySelector('.winner');
+	const winner = document.createElement('p');
+	winnerDiv.appendChild(winner);
 
-const paperButton = document.getElementById("scissors");
-paperButton.onclick = () => playRound("paper", getComputerChoice());
+	if (playerScore === 5) {
+		winner.textContent = "You win!";
+		resetGame(winner);
+	} else if (computerScore === 5) {
+		winner.textContent = "Computer wins!";
+		resetGame(winner);
+	}
+}
 
-const scissorsButton = document.getElementById("paper");
-scissorsButton.onclick = () => playRound("scissors", getComputerChoice());
+function resetGame(winner) {
+	const body = document.querySelector('body');
+	const resetBtn = document.createElement('button');
+	resetBtn.classList.add('reset-button');
+	resetBtn.textContent = 'Reset Game';
+	body.appendChild(resetBtn);
 
-const body = document.querySelector("body");
-const playerScore = document.createElement("p");
-playerScore.classList.add("playerScore");
-playerScore.textContent = humanScore;
-
-const compScore = document.createElement("p");
-compScore.classList.add("computerScore");
-compScore.textContent = computerScore;
-
-body.appendChild(playerScore);
-body.appendChild(compScore);
+	resetBtn.addEventListener('click', (event) => {
+		updateScoreDisplay(0, 0, 0);
+		winner.textContent = '';
+	})
+}
