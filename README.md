@@ -1,4 +1,4 @@
-# Rock Paper Scissors
+# ✊✋✌️ Rock Paper Scissors
 A simple game of rock, paper, scissors with the computer.
 First to 5 wins!
 
