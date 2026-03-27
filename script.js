@@ -55,10 +55,10 @@ function updateScoreDisplay(playerScore, computerScore, drawScore) {
 	draw.textContent = drawScore;
 }
 
+const winnerDiv = document.querySelector('.winner');
+const winner = document.createElement('p');
+winnerDiv.appendChild(winner);
 function checkWinner(playerScore, computerScore) {
-	const winnerDiv = document.querySelector('.winner');
-	const winner = document.createElement('p');
-	winnerDiv.appendChild(winner);
 
 	if (playerScore === 5) {
 		winner.textContent = "You win!";
