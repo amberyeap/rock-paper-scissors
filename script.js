@@ -77,7 +77,11 @@ function resetGame(winner) {
 	body.appendChild(resetBtn);
 
 	resetBtn.addEventListener('click', (event) => {
-		updateScoreDisplay(0, 0, 0);
+		playerScore = 0;
+		computerScore = 0;
+		drawScore = 0;
+		updateScoreDisplay(playerScore, computerScore, drawScore);
 		winner.textContent = '';
+		resetBtn.remove();
 	})
 }
