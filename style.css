@@ -1,0 +1,58 @@
+* {
+	margin: 0;
+}
+
+html {
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+	background-color: #272635;
+	color: #e8e9f3;
+}
+
+h1 {
+	font-size: 80px;
+	text-align:center;
+	margin: 30px 0px;
+}
+
+.scores {
+	display: flex;
+	justify-content: center;
+	gap: 40px;
+	font-size: 50px;
+	text-align: center;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	margin-top: 20px;
+}
+
+.buttons button {
+	background-color: transparent;
+	font-size: 100px;
+	border: 3px #e8e9f3 solid;
+	border-radius: 10px;
+	padding: 10px 20px;
+}
+
+.reset-button {
+	display: block;
+	margin: 30px auto;
+	background-color:transparent;
+	color:#e8e9f3;
+	font-size:30px;
+	border: 3px #e8e9f3 solid;
+	border-radius: 10px;
+}
+
+.winner p {
+	color: #e8e9f3;
+	font-size: 60px;
+	text-align: center;
+	margin: 30px 0px;
+}
