@@ -58,8 +58,8 @@ function updateScoreDisplay(playerScore, computerScore, drawScore) {
 const winnerDiv = document.querySelector('.winner');
 const winner = document.createElement('p');
 winnerDiv.appendChild(winner);
-function checkWinner(playerScore, computerScore) {
 
+function checkWinner(playerScore, computerScore) {
 	if (playerScore === 5) {
 		winner.textContent = "You win!";
 		resetGame(winner);
@@ -76,12 +76,15 @@ function resetGame(winner) {
 	resetBtn.textContent = 'Reset Game';
 	body.appendChild(resetBtn);
 
+	buttons.forEach(button => button.disabled = true);
+
 	resetBtn.addEventListener('click', (event) => {
 		playerScore = 0;
 		computerScore = 0;
 		drawScore = 0;
 		updateScoreDisplay(playerScore, computerScore, drawScore);
 		winner.textContent = '';
+		buttons.forEach(button => button.disabled = false);
 		resetBtn.remove();
 	})
 }
