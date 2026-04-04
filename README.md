@@ -5,9 +5,8 @@ First to 5 wins!
 ## About
 The purpose of this project was mainly to practice DOM manipulation and event handling using Javascript.
 
-## Installation/Usage
-1. ```git clone``` this repo
-2. Open the ```index.html``` file in your browser
+## Live Demo
+[Link](https://rock-paper-scissors-one-rho.vercel.app/)
 
 ## Technologies Used
 - HTML
